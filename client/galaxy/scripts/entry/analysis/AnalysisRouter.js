@@ -316,13 +316,6 @@ export const getAnalysisRouter = (Galaxy) =>
         },
 
         show_custom_builds: function () {
-            const historyPanel = this.page.historyPanel.historyView;
-            if (!historyPanel || !historyPanel.model || !historyPanel.model.id) {
-                window.setTimeout(() => {
-                    this.show_custom_builds();
-                }, 500);
-                return;
-            }
             this._display_vue_helper(CustomBuilds);
         },
 
