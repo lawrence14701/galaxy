@@ -74,8 +74,8 @@ $.fn.make_text_editable = function (config_dict) {
         } else {
             input_elt = $("<input type='text'/>")
                 .attr({ value: $.trim(cur_text), size: num_cols })
-                .blur(() => {
-                    set_text(cur_text);
+                  .blur(function(){
+                     set_text($(this).val());
                 })
                 .keyup(function (e) {
                     if (e.keyCode === 27) {
