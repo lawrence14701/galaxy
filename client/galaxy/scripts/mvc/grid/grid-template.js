@@ -131,8 +131,9 @@ export default {
 
         // empty grid?
         if (items_length === 0) {
-            // No results.
-            tmpl += '<tr><td colspan="100"><em>No Items</em></td></tr>';
+            const searchTerm = options.filters && options.filters["free-text-search"];
+            const noItemsMsg = searchTerm ? `No matching entries found for <strong>${searchTerm}</strong>`:'No Items'
+            tmpl += `<tr><td colspan="100"><em>${noItemsMsg}</em></td></tr>`;
         }
 
         // create rows
