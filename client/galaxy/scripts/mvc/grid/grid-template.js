@@ -132,13 +132,12 @@ export default {
         if (items_length === 0) {
             const filters = options.filters;
             const searchTerm = filters["free-text-search"] || "";
-            const tags = filters.tags !== "All" ? `tags:${filters.tags} `: "";
+            const tags = filters.tags !== "All" ? `tags:${filters.tags} ` : "";
             const name = filters.name && filters.name !== "All" ? `name:${filters.name}` : "";
-            const searchMsg = searchTerm || `${tags}${name}`
-            const noItemsMsg = searchMsg ? `No matching entries found for <strong>${searchMsg}</strong>`:"No items";
+            const searchMsg = searchTerm || `${tags}${name}`;
+            const noItemsMsg = searchMsg ? `No matching entries found for <strong>${searchMsg}</strong>` : "No items";
 
             tmpl += `<tr><td colspan="100"><em>${noItemsMsg}</em></td></tr>`;
-
         }
 
         // create rows
