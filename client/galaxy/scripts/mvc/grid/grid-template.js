@@ -132,12 +132,13 @@ export default {
         if (items_length === 0) {
             const filters = options.filters;
             const searchTerm = filters["free-text-search"] || "";
-            const tags = filters.tags !== "All" ? `tags:${filters.tags} ` : "";
+            const tags = filters.tags !== "All" ? `tags:${filters.tags} `: "";
             const name = filters.name && filters.name !== "All" ? `name:${filters.name}` : "";
-            const searchMsg = searchTerm || `${tags}${name}`;
-            const noItemsMsg = searchMsg ? `No matching entries found for <strong>${searchMsg}</strong>` : "No items";
+            const searchMsg = searchTerm || `${tags}${name}`
+            const noItemsMsg = searchMsg ? `No matching entries found for <strong>${searchMsg}</strong>`:"No items";
 
             tmpl += `<tr><td colspan="100"><em>${noItemsMsg}</em></td></tr>`;
+
         }
 
         // create rows
@@ -445,11 +446,9 @@ export default {
             // Carry forward filtering criteria with hidden inputs.
             for (const column of options.columns) {
                 var filter_value = filters[column.key];
-                if (filter_value) {
-                    if (filter_value != "All") {
-                        if (column.is_text) {
-                            filter_value = JSON.stringify(filter_value);
-                        }
+                if (filter_value && filter_value != "All") {
+                    if (column.is_text) {
+                        filter_value = JSON.stringify(filter_value);
                     }
                     tmpl += `<input type="hidden" id="${column.key}" name="f-${column.key}" value="${filter_value}"/>`;
                 }
