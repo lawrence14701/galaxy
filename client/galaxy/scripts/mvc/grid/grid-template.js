@@ -128,11 +128,15 @@ export default {
         // initialize
         var tmpl = "";
         var items_length = options.items.length;
-
         // empty grid?
         if (items_length === 0) {
-            const searchTerm = options.filters && options.filters["free-text-search"];
-            const noItemsMsg = searchTerm ? `No matching entries found for <strong>${searchTerm}</strong>`:'No Items'
+            const filters = options.filters;
+            const searchTerm = filters["free-text-search"] || "";
+            const tags = filters.tags !== "All" ? `tags:${filters.tags} ` : "";
+            const name = filters.name && filters.name !== "All" ? `name:${filters.name}` : "";
+            const searchMsg = searchTerm || `${tags}${name}`;
+            const noItemsMsg = searchMsg ? `No matching entries found for <strong>${searchMsg}</strong>` : "No items";
+
             tmpl += `<tr><td colspan="100"><em>${noItemsMsg}</em></td></tr>`;
         }
 
@@ -446,8 +450,8 @@ export default {
                         if (column.is_text) {
                             filter_value = JSON.stringify(filter_value);
                         }
-                        tmpl += `<input type="hidden" id="${column.key}" name="f-${column.key}" value="${filter_value}"/>`;
                     }
+                    tmpl += `<input type="hidden" id="${column.key}" name="f-${column.key}" value="${filter_value}"/>`;
                 }
             }
             // Print current filtering criteria and links to delete.
